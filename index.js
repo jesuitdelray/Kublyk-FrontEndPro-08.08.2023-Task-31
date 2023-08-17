@@ -1,25 +1,9 @@
-const options = ["😃", "😊", "😐", "😕", "😞"]
-const voteCount = new Array(options.length).fill(0)
+const parent = document.querySelector(".parent")
 
-function updateResults() {
-    const resultsContainer = document.getElementById("resultsContainer")
-    resultsContainer.innerHTML = ""
+parent.addEventListener("click", event => {
+    if (event.target.closest(".emoji__picture")) {
+        const nextElementSibling = event.target.nextElementSibling
 
-    for (let i = 0; i < options.length; i++) {
-        const option = options[i]
-        const count = voteCount[i]
-
-        const smileyDiv = document.createElement("div")
-        smileyDiv.textContent = option + " - " + count
-        resultsContainer.appendChild(smileyDiv)
+        nextElementSibling.textContent = Number(nextElementSibling.textContent) + 1
     }
-}
-
-function vote(index) {
-    if (index >= 0 && index < options.length) {
-        voteCount[index]++
-        updateResults()
-    }
-}
-
-updateResults() // Initialize results on page load
+})
